@@ -10,7 +10,7 @@
         },
         // 配置Dep优化行为
         optimizeDeps: {
-            // exclude: ['dep-a', 'dep-b'],
+            // exclude: ['element-ui'],
         },
         // 转换Vue自定义块的功能。
         vueCustomBlockTransforms: {
