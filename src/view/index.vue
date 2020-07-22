@@ -12,19 +12,19 @@
 
 <script>
 import lbTable from '../components/lb-table/index.vue'
-import { reactive, computed } from 'vue';
-import { useTabData, useMethods } from './index';
+import { reactive, computed, toRef } from 'vue';
+import { useData, useMethods } from './index';
 export default {
   components: {
     lbTable
   },
   setup() {
-    const { tabData } = useTabData();
+    let { tabData } = useData();
     const addList = () => useMethods.addList(tabData);
+    const del = () => useMethods.del(tabData);
     return {
       tabData,
-      lbTable,
-      ...useMethods,
+      del,
       addList
     }
   }

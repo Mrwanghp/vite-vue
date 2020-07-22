@@ -1,4 +1,7 @@
-import { reactive } from 'vue'
+import {
+    reactive,
+    toRefs
+} from 'vue'
 //UUID
 const createRandomUid = () => {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -8,29 +11,42 @@ const createRandomUid = () => {
     });
 };
 // 数据源
-export function useTabData() {
-    const tabData = reactive([
-        { id: createRandomUid(), name: '刘贝', language: 5, mathematics: 8, english: 2.5, check: true },
-        { id: createRandomUid(), name: '拉豪', language: 3, mathematics: 2.5, english: 10, check: false  }
-    ])
-    return {
-        tabData
-    }
+export function useData() {
+    const state = reactive({
+        tabData: [{
+                id: createRandomUid(),
+                name: '刘贝',
+                language: 5,
+                mathematics: 8,
+                english: 2.5,
+                check: true
+            },
+            {
+                id: createRandomUid(),
+                name: '拉豪',
+                language: 3,
+                mathematics: 2.5,
+                english: 10,
+                check: false
+            }
+        ]
+    })
+    return toRefs(state)
 }
 //增加改查等按钮操作
 export const useMethods = {
     // 增加
     addList(data) {
-        console.log(data,'增增')
-        data.push({})
+        console.log(data, '增增')
+        data.value.push({})
     },
-    del() { 
-        console.log(11,'删')
+    del(data) {
+        data.value = data.value.filter(item => !item.check);
     },
     edit() {
-        console.log(11,'改')
+        console.log(11, '改')
     },
     search() {
-        console.log(11,'查')
+        console.log(11, '查')
     }
 }

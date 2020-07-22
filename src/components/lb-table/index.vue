@@ -3,7 +3,7 @@
       <table border="1"  align="center">
       <thead  align="center">
         <tr>
-          <td><input type="checkbox"></td>
+          <td><input type="checkbox"  v-model="check"></td>
           <td>姓名</td>
           <td>语文</td>
           <td>数学</td>
@@ -26,20 +26,8 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-// -----
-//组合函数- 计算总数
-function useTotal(data) {
-    let total = 0;
-    for (let i in data) {
-      if(typeof data[i] === 'number' ) total+=data[i];
-    }
-    return total
-}
-function checked(item, checkArr) {
-  item.check = !item.check;
-  checkArr.push(item.id);
-}
+import { ref, watch, computed } from 'vue';
+import { useTotal, checked} from './index'
 export default {
   props:{
     tabData:{
@@ -50,13 +38,18 @@ export default {
     }
   },
   setup(props) {
-    const tabData = props.tabData;
-    const checkArr = ref([]);
+    const tabData = computed(() => props.tabData);
+    let check = ref(false);
+    // const checkedAll = () => {
+    //   check.value = checkAll(tabData);
+    //   console.log(checkAll(tabData))
+    // };
     return {
-      checkArr, 
+      check,
       tabData, 
       useTotal,
-      checked
+      checked,
+      // checkedAll
     }
   }
 }
