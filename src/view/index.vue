@@ -20,12 +20,9 @@ export default {
   },
   setup() {
     let { tabData } = useData();
-    const addList = () => useMethods.addList(tabData);
-    const del = () => useMethods.del(tabData);
     return {
       tabData,
-      del,
-      addList
+      ...useMethods
     }
   }
 }

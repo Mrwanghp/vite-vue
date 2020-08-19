@@ -19,7 +19,7 @@ export function useData() {
                 language: 5,
                 mathematics: 8,
                 english: 2.5,
-                check: true
+                check: false
             },
             {
                 id: createRandomUid(),
@@ -31,17 +31,16 @@ export function useData() {
             }
         ]
     })
-    return toRefs(state)
+    return state
 }
 //增加改查等按钮操作
 export const useMethods = {
     // 增加
-    addList(data) {
-        console.log(data, '增增')
-        data.value.push({})
+    addList() {
+        this.tabData.push({})
     },
-    del(data) {
-        data.value = data.value.filter(item => !item.check);
+    del() {
+         this.tabData =  this.tabData.filter(item => !item.check);
     },
     edit() {
         console.log(11, '改')
